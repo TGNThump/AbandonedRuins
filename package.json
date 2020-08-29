@@ -1,0 +1,21 @@
+{
+  "name": "abandoned_ruins",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx npm-run-all -s build:*",
+    "build:scripts": "npx typescript-to-lua -p tsconfig.json",
+    "build:public": "npx cpx public/**/*.* dist",
+    "build:copy": "npx cpx dist/**/*.* %appdata%/Factorio/mods/abandoned_ruins_1.0.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/factorio": "git+https://github.com/sguest/factorio-types.git"
+  },
+  "devDependencies": {
+    "typescript-to-lua": "^0.35.0"
+  }
+}

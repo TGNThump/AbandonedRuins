@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["esnext"],
+    "strict": true,
+    "baseUrl": ".",
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "tstl": {
+    "luaTarget": "5.2",
+    "noImplicitSelf": true,
+    "noHeader": true
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}
