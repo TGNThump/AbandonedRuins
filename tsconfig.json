@@ -4,13 +4,14 @@
     "lib": ["esnext"],
     "strict": true,
     "baseUrl": ".",
-    "outDir": "dist",
-    "rootDir": "src"
+    "outDir": "./dist",
+    "rootDir": "./src"
   },
   "tstl": {
     "luaTarget": "5.2",
     "noImplicitSelf": true,
-    "noHeader": true
+    "noHeader": true,
+    "sourceMapTraceback": true
   },
   "include": [
     "src/**/*.ts"
