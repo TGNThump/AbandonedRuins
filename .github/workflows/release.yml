@@ -19,7 +19,7 @@ jobs:
           node-version: 14.x
       - run: npm install
       - id: build
-        run: echo "##[set-output name=asset_path;]$(npm run build --if-present --silent)"
+        run: npm run build --if-present
       - run: npm test
         env:
           CI: true
@@ -41,5 +41,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
           asset_path: ./${{ steps.build.outputs.asset_path }}
-          asset_name: ${{ steps.build.outputs.asset_path }}
+          asset_name: ${{ steps.build.outputs.asset_name }}
           asset_content_type: application/zip

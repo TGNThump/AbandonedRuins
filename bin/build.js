@@ -6,6 +6,7 @@ const { spawn } = require("child_process");
 const { ncp } = require('ncp');
 const { promisify }  = require('util');
 const zip = require('bestzip');
+const core = require('@actions/core');
 
 let path = `dist/${packageJson.name}_${packageJson.version}`;
 
@@ -35,7 +36,9 @@ let path = `dist/${packageJson.name}_${packageJson.version}`;
     promisify(copyFile)('LICENSE.md', path + '/LICENSE.md')
   ]);
 
+
   await zip({source: `${packageJson.name}_${packageJson.version}`, destination: `${packageJson.name}_${packageJson.version}.zip`, cwd: 'dist'})
 
-  process.stdout.write(`dist/${packageJson.name}_${packageJson.version}.zip`);
+  core.setOutput('asset_path', `dist/${packageJson.name}_${packageJson.version}.zip`);
+  core.setOutput('asset_name', `${packageJson.name}_${packageJson.version}.zip`)
 })();

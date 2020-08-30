@@ -18,6 +18,7 @@
     "@types/factorio": "git+https://github.com/sguest/factorio-types.git"
   },
   "devDependencies": {
+    "@actions/core": "^1.2.5",
     "bestzip": "^2.1.6",
     "ncp": "2.0.0",
     "typescript-to-lua": "^0.35.0"
