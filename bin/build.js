@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const packageJson = require("../package.json");
-const { writeFile, copyFile, mkdir,rmdir } = require("fs");
+const { writeFile, copyFile, mkdir, rmdir } = require("fs");
 const { spawn } = require("child_process");
 const { ncp } = require('ncp');
 const { promisify }  = require('util');
