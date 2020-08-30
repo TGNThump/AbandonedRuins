@@ -2,7 +2,7 @@
 name: New Ruin
 about: Submit a new ruin blueprint for review
 title: New Ruin
-labels: New Ruin
+labels: New Ruins
 assignees: ''
 
 ---
