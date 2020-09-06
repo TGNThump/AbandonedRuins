@@ -12,7 +12,35 @@ script.on_init(() => {
 	abandonedWeaponry.research_all_technologies(false);
 	abandonedWeaponry.set_cease_fire(game.forces['enemy'], true);
 	abandonedWeaponry.ghost_time_to_live = 1;
+
+	// noinspection JSUnusedLocalSymbols
+	let inventory = game.create_inventory(1);
+
+	reloadModConfig();
 })
+
+script.on_event(defines.events.on_runtime_mod_setting_changed, () => {
+	reloadModConfig();
+});
+
+function reloadModConfig(){
+	let inventory = <LuaInventory> game.get_script_inventories()[script.mod_name][0];
+	inventory.clear();
+	inventory.insert({ name: "blueprint-book" });
+	let book = inventory[1];
+
+	let blueprintBookString = settings.global['ruins-book'].value as string;
+	if (blueprintBookString === "") {
+		blueprintBookString = Ruins;
+	}
+
+	book.import_stack(blueprintBookString);
+}
+
+function getRandomRuin(): LuaItemStack{
+	let ruins = <LuaInventory> game.get_script_inventories()[script.mod_name][0][1].get_inventory(defines.inventory.item_main);
+	return <LuaItemStack> Random.of(ruins as unknown as LuaItemStack[]);
+}
 
 script.on_event(defines.events.on_chunk_generated, (event: on_chunk_generated) => {
 	let left_top = event.area.left_top as {x: number, y: number};
@@ -24,9 +52,6 @@ script.on_event(defines.events.on_chunk_generated, (event: on_chunk_generated) =
 	};
 
 	if (Random.float() < settings.global['ruins-chance'].value){
-		let ruin = Random.of(Ruins);
-		if (ruin == null) return;
-
 		let force = game.forces['abandoned'];
 		if (force == null) return;
 
@@ -38,7 +63,13 @@ script.on_event(defines.events.on_chunk_generated, (event: on_chunk_generated) =
 
 		let percentDamaged = Random.float();
 
-		placeBlueprint(event.surface, center, force, ruin).forEach(entity => {
+		getRandomRuin().build_blueprint({
+			surface: event.surface,
+			force,
+			position: center,
+			force_build: false,
+			direction: defines.direction.north
+		}).forEach(entity => {
 			if (Random.float() < percentDamaged){
 				entity.destroy({});
 			} else {
@@ -63,26 +94,3 @@ script.on_event(defines.events.script_raised_revive, (event: script_raised_reviv
 		});
 	}
 })
-
-function placeBlueprint(surface: LuaSurface, position: Position, force: LuaForce, blueprintString: string): LuaEntity[]{
-	let bluePrintItem = surface.create_entity({
-		name: "item-on-ground",
-		position,
-		stack: {name: "blueprint"}
-	} as CreateItemEntityParams);
-	if (bluePrintItem == null) return [];
-
-	bluePrintItem.stack.import_stack(blueprintString);
-
-	let entities = bluePrintItem.stack.build_blueprint({
-		surface,
-		force,
-		position,
-		force_build: false,
-		direction: defines.direction.north
-	});
-
-	bluePrintItem.destroy({});
-
-	return entities;
-}

@@ -4,7 +4,6 @@ data.extend([
     name: "ruins-min-distance-from-spawn",
     setting_type: "runtime-global",
     default_value: 100,
-    order: "a",
   },
   {
     type: "double-setting",
@@ -13,6 +12,12 @@ data.extend([
     default_value: 0.2,
     minimum_value: 0.0,
     maximum_value: 1.0,
-    order: "b",
   },
+  {
+    type: "string-setting",
+    name: "ruins-book",
+    setting_type: "runtime-global",
+    default_value: '',
+    allow_blank: true,
+  }
 ]);
