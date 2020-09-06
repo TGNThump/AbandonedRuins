@@ -6,4 +6,4 @@ You might have crashed on this planet, but it seems you weren't the first to set
 
 Abandoned ruins generates abandoned small bases and ruins throughout the map. Exploit these to bootstrap your technological progression or salvage them for parts.
 
-The variety of ruins is limited for now, but new ruins and functionality are planned for the future. Submit new ruins blueprint strings to be considered for addition to the mod [here](https://github.com/TGNThump/AbandonedRuins/issues/new).
+The variety of ruins is limited for now, but new ruins and functionality are planned for the future. Submit new ruins blueprint strings to be considered for addition to the mod [here](https://github.com/TGNThump/AbandonedRuins/issues/new/choose).
