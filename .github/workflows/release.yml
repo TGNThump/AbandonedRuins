@@ -45,9 +45,10 @@ jobs:
           asset_content_type: application/zip
       - name: Upload to mod portal
         id: upload-mod-portal-asset
-        run: npm run upload
-        env:
+        uses: TGNThump/factorio-publish-mod-action@v1
+        with:
+          mod_portal_username: tgnthump
+          mod_portal_password: ${{secrets.FACTORIO_MOD_PORTAL_PASSWORD}}
+          mod_name: abandoned_ruins
           asset_path: ./${{ steps.build.outputs.asset_path }}
           asset_name: ${{ steps.build.outputs.asset_name }}
-          factorio_mod_portal_username: tgnthump
-          factorio_mod_portal_password: ${{secrets.FACTORIO_MOD_PORTAL_PASSWORD}}
