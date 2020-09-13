@@ -46,7 +46,7 @@ jobs:
       - name: Upload to mod portal
         id: upload-mod-portal-asset
         run: npm run upload
-        with:
+        env:
           asset_path: ./${{ steps.build.outputs.asset_path }}
           asset_name: ${{ steps.build.outputs.asset_name }}
           factorio_mod_portal_username: tgnthump
