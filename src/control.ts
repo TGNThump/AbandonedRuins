@@ -47,29 +47,38 @@ script.on_event(defines.events.on_chunk_generated, (event: on_chunk_generated) =
 	let right_bottom = event.area.right_bottom as {x: number, y: number};
 
 	let center = {
-		x: left_top.x + right_bottom.x / 2,
-		y: left_top.y + right_bottom.y / 2
+		x: (left_top.x + right_bottom.x) / 2,
+		y: (left_top.y + right_bottom.y) / 2
 	};
 
 	if (Random.float() < settings.global['ruins-chance'].value){
 		let force = game.forces['abandoned'];
 		if (force == null) return;
 
-		center.x += Random.float(-10, 10);
-		center.y += Random.float(-10, 10);
+		center.x += Random.int(-10, 10);
+		center.y += Random.int(-10, 10);
 
-		if (Math.abs(center.x) < settings.global['ruins-min-distance-from-spawn'].value) return;
-		if (Math.abs(center.y) < settings.global['ruins-min-distance-from-spawn'].value) return;
+		if (Math.abs(center.x) < settings.global['ruins-min-distance-from-spawn'].value && Math.abs(center.y) < settings.global['ruins-min-distance-from-spawn'].value) {
+			return;
+		}
 
 		let percentDamaged = Random.float();
 
-		getRandomRuin().build_blueprint({
+		let ruin = getRandomRuin();
+
+		let entities = ruin.build_blueprint({
 			surface: event.surface,
 			force,
 			position: center,
 			force_build: false,
-			direction: defines.direction.north
-		}).forEach(entity => {
+			direction: Random.direction()
+		});
+
+		// if (entities.length === 0){
+		// 	game.print(`Failed to generate ruin at ${center.x}, ${center.y}`, {r:1,g:0,b:0,a:1});
+		// }
+
+		entities.forEach(entity => {
 			if (Random.float() < percentDamaged){
 				entity.destroy({});
 			} else {
