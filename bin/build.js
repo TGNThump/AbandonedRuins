@@ -41,4 +41,9 @@ let path = `dist/${packageJson.name}_${packageJson.version}`;
 
   core.setOutput('asset_path', `dist/${packageJson.name}_${packageJson.version}.zip`);
   core.setOutput('asset_name', `${packageJson.name}_${packageJson.version}.zip`)
+
+  if (process.argv.includes('install')) {
+    console.log(`\nInstalling to ${process.env.APPDATA}/Factorio/mods`)
+    await promisify(ncp)(`dist/${packageJson.name}_${packageJson.version}`, `${process.env.APPDATA}/Factorio/mods/${packageJson.name}_${packageJson.version}`);
+  }
 })();

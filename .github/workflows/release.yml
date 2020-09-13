@@ -43,3 +43,11 @@ jobs:
           asset_path: ./${{ steps.build.outputs.asset_path }}
           asset_name: ${{ steps.build.outputs.asset_name }}
           asset_content_type: application/zip
+      - name: Upload to mod portal
+        id: upload-mod-portal-asset
+        run: npm run upload
+        with:
+          asset_path: ./${{ steps.build.outputs.asset_path }}
+          asset_name: ${{ steps.build.outputs.asset_name }}
+          factorio_mod_portal_username: tgnthump
+          factorio_mod_portal_password: ${{secrets.FACTORIO_MOD_PORTAL_PASSWORD}}
