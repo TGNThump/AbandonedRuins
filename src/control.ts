@@ -89,6 +89,8 @@ script.on_event(defines.events.on_chunk_generated, (event: on_chunk_generated) =
 })
 
 script.on_event(defines.events.script_raised_revive, (event: script_raised_revive) => {
+	if ((<LuaForce> event.entity.force).name !== 'abandoned') return;
+
 	if (event.entity.type == 'assembling-machine'){
 		event.entity.recipe_locked = true;
 	}
