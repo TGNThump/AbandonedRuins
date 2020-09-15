@@ -1,6 +1,6 @@
 {
   "name": "abandoned_ruins",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "You may have crash-landed on this planet, but it seems you weren't the first to settle here. Abandoned Ruins adds ruins to world generation for you to explore and build into your own base, but be careful... Just because the ruins are long since abandoned, their defences might not be as dormant.",
   "main": "index.js",
   "scripts": {
