@@ -2,19 +2,26 @@ import Random from "./Random";
 import Ruins from "./Ruins";
 
 script.on_init(() => {
-	let abandoned = game.create_force('abandoned');
-	abandoned.research_all_technologies(false);
-	abandoned.set_friend(game.forces['player'], true);
-	abandoned.set_cease_fire(game.forces['enemy'], true);
-	abandoned.ghost_time_to_live = 1;
+ 	if (!('abandoned' in game.forces)) {
+		let abandoned = game.create_force('abandoned');
+		abandoned.research_all_technologies(false);
+		abandoned.set_friend(game.forces['player'], true);
+		abandoned.set_cease_fire(game.forces['enemy'], true);
+		abandoned.ghost_time_to_live = 1;
+	}
 
-	let abandonedWeaponry = game.create_force('abandoned-weaponry');
-	abandonedWeaponry.research_all_technologies(false);
-	abandonedWeaponry.set_cease_fire(game.forces['enemy'], true);
-	abandonedWeaponry.ghost_time_to_live = 1;
+	if (!('abandoned-weaponry' in game.forces)) {
+		let abandonedWeaponry = game.create_force('abandoned-weaponry');
+		abandonedWeaponry.research_all_technologies(false);
+		abandonedWeaponry.set_cease_fire(game.forces['enemy'], true);
+		abandonedWeaponry.ghost_time_to_live = 1;
+	}
 
-	// noinspection JSUnusedLocalSymbols
-	let inventory = game.create_inventory(1);
+	let inventories = game.get_script_inventories()[script.mod_name];
+	if (inventories === null || inventories.length === 0) {
+		// noinspection JSUnusedLocalSymbols
+		let inventory = game.create_inventory(1);
+	}
 
 	reloadModConfig();
 })
