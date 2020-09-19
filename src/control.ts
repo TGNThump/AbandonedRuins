@@ -87,6 +87,17 @@ script.on_event(defines.events.on_chunk_generated, (event: on_chunk_generated) =
 
 		entities.forEach(entity => {
 			if (Random.float() < percentDamaged){
+
+				let remnantName = entity.ghost_prototype.name + '-remnants';
+				if (remnantName in game.entity_prototypes && Random.float() < percentDamaged) {
+					entity.surface.create_entity({
+						name: remnantName,
+						position: entity.position,
+						direction: entity.direction,
+						force: entity.force
+					});
+				}
+
 				entity.destroy({});
 			} else {
 				entity.revive({raise_revive: true});
