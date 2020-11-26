@@ -4,8 +4,7 @@
   "description": "You may have crash-landed on this planet, but it seems you weren't the first to settle here. Abandoned Ruins adds ruins to world generation for you to explore and build into your own base, but be careful... Just because the ruins are long since abandoned, their defences might not be as dormant.",
   "main": "index.js",
   "scripts": {
-    "build": "node bin/build.js",
-    "upload": "node bin/upload.js"
+    "build": "node bin/build.js"
   },
   "config": {
     "title": "Abandoned Ruins",
@@ -23,7 +22,7 @@
     "bestzip": "^2.1.6",
     "ncp": "2.0.0",
     "request": "^2.88.2",
-    "typescript-to-lua": "^0.35.0",
+    "typescript-to-lua": "^0.36.0",
     "web-request": "^1.0.7"
   }
 }

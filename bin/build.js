@@ -32,6 +32,7 @@ let path = `dist/${packageJson.name}_${packageJson.version}`;
       factorio_version: packageJson.config.factorio_version,
     })),
     promisify(ncp)('public', path),
+    promisify(copyFile)('changelog.txt', path + '/changelog.txt'),
     promisify(copyFile)('README.md', path + '/README.md'),
     promisify(copyFile)('LICENSE.md', path + '/LICENSE.md')
   ]);
